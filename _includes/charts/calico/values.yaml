@@ -1,0 +1,72 @@
+# This is default chart for Calico, that deploys Calico CNI on AWS EKS. 
+# If this chart is used for deployment on other platforms, please change values datastore,
+# network, vxlan and ipam according to your deployment. 
+
+#Possible values "Kubernetes", "etcd" 
+datastore: "kubernetes"
+
+#Possible values "calico", "flannel", "canal"
+network: "calico"
+
+#true or false. If disabled IPIP will be the overlay encapsulation 
+vxlan: "true"
+
+#Possible values include "calico-ipam", "host-local"
+ipam: "calico-ipam"
+
+#Values for etcd datastore connectivity, if datastore=etcd
+#etcd:
+#   tls:
+#     ca:
+#     crt:
+#     key:
+
+#disabled by default. 
+typha:
+  enabled: false
+  image: "calico/typha"
+  tag: "v3.8.0"
+  #env: {}
+
+cni: 
+  image: "docker.io/calico/cni"
+  tag: "v3.17.1"
+  #env: {}
+
+flexvol: 
+  image: "docker.io/calico/pod2daemon-flexvol"
+  tag: "v3.17.1"
+
+node: 
+  image: "docker.io/calico/node"
+  tag: "v3.17.1"
+#  env: {}
+#  - name: CALICO_IPV4POOL_CIDR
+#    value: "10.0.0.0/16"
+
+# only used when network=flannel
+flannel: 
+  image: "quay.io/coreos/flannel"
+  tag: "v0.12.0"
+  #env: {}
+
+kubeControllers: 
+  image: "docker.io/calico/kube-controllers"
+  tag: "v3.17.1"
+  #env: {}
+  serviceAccount:
+    name: "calico-kube-controllers"
+    create: true
+    rbac: true
+    # annotations: {}
+
+nodeName: 
+# this may be confusing, but this is for SA that gets created based on the 
+# network selected (e.g calico, flannel, canal )
+  serviceAccount:
+#    name: #This gets created from the functions based on the network used. 
+          #Refer to _functions.tpl 
+    create: true
+    rbac: true
+#    annotations: 
+#      eks.amazonaws.com/role-arn: "arn:aws:iam::123456789123:role/calico-node"

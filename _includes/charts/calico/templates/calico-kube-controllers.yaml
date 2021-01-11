@@ -107,7 +107,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: calico-kube-controllers
+  name: {{- .Values.kubeControllers.serviceAccount.name -}}
   namespace: kube-system
   {{- with .Values.kubeControllers.serviceAccount.annotations }}
   annotations:
