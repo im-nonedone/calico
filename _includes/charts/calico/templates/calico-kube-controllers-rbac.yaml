@@ -1,3 +1,4 @@
+{{- if .Values.kubeControllers.serviceAccount.rbac -}}
 {{- if eq .Values.datastore "etcd" }}
 # Include a clusterrole for the kube-controllers component,
 # and bind it to the calico-kube-controllers serviceaccount.
@@ -124,4 +125,5 @@ subjects:
   name: calico-kube-controllers
   namespace: kube-system
 ---
+{{- end }}
 {{- end }}

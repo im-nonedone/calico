@@ -29,7 +29,7 @@ spec:
           operator: Exists
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
-      serviceAccountName: calico-kube-controllers
+      serviceAccountName: {{.Values.kubeControllers.serviceAccount.name}}
       priorityClassName: system-cluster-critical
 {{- if eq .Values.datastore "etcd" }}
       # The controllers must run in the host network namespace so that
@@ -103,15 +103,18 @@ spec:
 {{- end }}
 
 ---
-
+{{- if .Values.kubeControllers.serviceAccount.create -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: calico-kube-controllers
   namespace: kube-system
-
+  {{- with .Values.kubeControllers.serviceAccount.annotations }}
+  annotations:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
 ---
-
+{{- end }}
 # This manifest creates a Pod Disruption Budget for Controller to allow K8s Cluster Autoscaler to evict
 
 apiVersion: policy/v1beta1

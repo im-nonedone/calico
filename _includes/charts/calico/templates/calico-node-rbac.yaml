@@ -1,3 +1,4 @@
+{{- if .Values.nodeName.serviceAccount.rbac -}}
 # Include a clusterrole for the calico-node DaemonSet,
 # and bind it to the calico-node serviceaccount.
 kind: ClusterRole
@@ -209,4 +210,5 @@ subjects:
 - kind: ServiceAccount
   name: calico-node
   namespace: kube-system
+{{- end }}
 {{- end }}
