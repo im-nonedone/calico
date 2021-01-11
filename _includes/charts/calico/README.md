@@ -9,15 +9,16 @@ Add installation instructions once charts repo is created
 
 ### Configuration
 The following table lists the configurable parameters for this chart. Required values must be set based on the deployment for the chart to work. 
-| Parameter  | Description | Type |Default | Required |
-| ------------- | ------------- | ------------- | ------------- |
-| `datastore`  |  [Datastore for Calico](https://docs.projectcalico.org/getting-started/kubernetes/hardway/the-calico-datastore) | `string` | `kubernetes` | yes  |
-| `vxlan`  |  Enables VxLAN. Read more about [overlaynetworking](https://docs.projectcalico.org/networking/vxlan-ipip)  | `boolean` |`true`  | no  |
-| `network`  | Network to use. Read more about [determine best networking option](https://docs.projectcalico.org/networking/determine-best-networking) | `calico`  | yes  |
+
+| Parameter  | Description | Type | Default | Required |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| `datastore`  |  [Datastore for Calico](https://docs.projectcalico.org/getting-started/kubernetes/hardway/the-calico-datastore) | `string` | `kubernetes` | yes |
+| `vxlan`  |  Enables VxLAN. Read more about [overlaynetworking](https://docs.projectcalico.org/networking/vxlan-ipip)  | `boolean` | `true` | no  |
+| `network`  | Network to use. Read more about [determine best networking option](https://docs.projectcalico.org/networking/determine-best-networking) | `calico` | yes |
 | `ipam`  | IP address management for Calico. Read more about [IPAM](https://docs.projectcalico.org/networking/get-started-ip-addresses) | `string` | `calico-ipam`  | yes  |
 | `bpf` | Variable to enable eBPF. Read more about [eBPF](https://docs.projectcalico.org/maintenance/enabling-bpf) | `boolean` | `` | no |
 | `etcd.endpoints` | Calico datastore endpoints | `string` | `` | no( Required if using etcd datastore) |
-| `etcd.tls.ca` |The root certificate of the certificate authority (CA) that issued the etcd server certificate | `string`| `` | no( Required if using etcd datastore) |
+| `etcd.tls.ca` |The root certificate of the certificate authority (CA) that issued the etcd server certificate | `string` | ` ` | no( Required if using etcd datastore) |
 | `etcd.tls.crt` | The client certificate issued to Calico for datastore connectivity | `string` | `` | no( Required if using etcd datastore) |
 | `etcd.tls.key` | Private key matching client certificate| `string` | `` | no( Required if using etcd datastore) |
 | `typha.enabled`  | Enables or disabled Typha. Read more about [Typha](https://docs.projectcalico.org/reference/typha/) | `string` | `false` | yes |
